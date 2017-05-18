@@ -14,6 +14,7 @@ angular.module('myApp').controller('registrationCtrl', ['$location', '$log', '$s
     var hasAttemptedLogin = false;
     
     function clickLogin () {
+        var timer;
         hasAttemptedLogin = true;
         if ($scope.login.length < 1) {
             //display error message
@@ -33,7 +34,8 @@ angular.module('myApp').controller('registrationCtrl', ['$location', '$log', '$s
                 } else {
                     //display error message for x seconds
                     $scope.showPWError = true;
-                    $timeout(function () {
+                    $timeout.cancel(timer);//prevent old timers from causing glitches
+                    timer = $timeout(function () {
                         $scope.showPWError = false;
                     }, 4000);
                 }
