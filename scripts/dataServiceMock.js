@@ -2,6 +2,7 @@ angular.module('myApp').service('dataServiceMock', ['$q', function ($q) {
     var service = {};
     service.checkLoginExists = checkLoginExists;
     service.checkPW = checkPW;
+    service.getAvatar = getAvatar;
     service.sendReset = sendReset;
     
     return service;
@@ -26,6 +27,17 @@ angular.module('myApp').service('dataServiceMock', ['$q', function ($q) {
             deferred.resolve(true);
         } else {
             deferred.resolve(false);
+        }
+        return deferred.promise;
+    }
+    
+    function getAvatar (login) {
+        //retrieves the avatar for a login
+        var deferred = $q.defer();
+        if (login) {
+            deferred.resolve('sample_avatar.png');
+        } else {
+            deferred.reject('missing login');
         }
         return deferred.promise;
     }

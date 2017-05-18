@@ -13,7 +13,15 @@ angular.module('myApp').controller('registrationCtrl', ['$location', '$log', '$s
         } else {
             dataServiceMock.checkPW($scope.login, $scope.pw).then(function(isCorrect) {
                 if (isCorrect) {
-                    $location.path('login_success');
+                    stateService.setLogin($scope.login);
+                    //get the avatar and save it
+                    dataServiceMock.getAvatar($scope.login).then(function (result) {
+                        stateService.loginAvatar = result;
+                    }).catch(function (error) {
+                        $log.error(error);//log the error
+                    }).finally(function () {
+                        $location.path('login_success');
+                    });
                 } else {
                     //display error message
                 }
