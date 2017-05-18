@@ -6,15 +6,27 @@ angular.module('myApp').controller('loginCtrl', ['$location', '$scope', 'dataSer
     $scope.pw = '';
     //functions
     $scope.clickRegister = clickRegister;
+    $scope.showLoginError = showLoginError;
+    
+    var hasAttemptedLogin = false;
     
     init();
     function clickRegister () {
         if ($scope.login.length > 0) {
             $location.path('register');
         } else {
-            //display error message
+            hasAttemptedLogin = true;
         }
     }
+    
+    function showLoginError () {
+        if ($scope.login.length <= 0 && hasAttemptedLogin) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+        
     
     function init () {
         if (stateService.loggedIn) {
