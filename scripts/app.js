@@ -14,6 +14,6 @@ myApp.config(function($routeProvider) {
         templateUrl : "templates/login_success.html"
     })
     .otherwise({
-        templateUrl : "templates/login.html"
+        redirectTo : "/"
     });
 });
