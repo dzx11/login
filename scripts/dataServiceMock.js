@@ -10,8 +10,9 @@ angular.module('myApp').service('dataServiceMock', ['$q', function ($q) {
     function checkLoginExists (login) {
         //return a promise with true value if login exists,
         //false otherwise
+        //mock: always return true if login length > 0
         var deferred = $q.defer();
-        if (login) {
+        if (login.length > 0) {
             deferred.resolve(true);
         } else {
             deferred.resolve(false);
