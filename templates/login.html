@@ -2,17 +2,17 @@
     <div class="col-sm-1 control-label">
         Login:
     </div>
-    <div class="col-sm-2 form-group" ng-class="{'has-error': showLoginError()}">
+    <div class="col-sm-4 form-group" ng-class="{'has-error': showLoginError()}">
         <input type="text" ng-model="login" class="form-control" aria-describedby="helpBlock">
         <span ng-if="showLoginError()" id="helpBlock" class="help-block">Login needs to have a length of at least 1 character.</span>
     </div>
 </div>
-<div class="row" class="form-group has-success">
-    <div class="col-sm-1">
+<div class="row" class="form-group">
+    <div class="col-sm-1 control-label">
         Password:
     </div>
-    <div class="col-sm-11" class="form-control">
-        <input type="password" ng-model="pw">
+    <div class="col-sm-4">
+        <input type="password" ng-model="pw" class="form-control">
     </div>
 </div>
 <div class="row">
