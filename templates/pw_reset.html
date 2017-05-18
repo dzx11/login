@@ -11,7 +11,7 @@
     <div class="col-sm-11 col-sm-offset-1">
         <button type="button" class="btn btn-default" ng-click="clickReset()">Reset Password</button>
         <div ng-if="showSuccess" class="alert alert-info">
-            An email with password reset instructions has been sent to the address on file for <b>{{usedLogin}}</b>.
+            An email with password reset instructions has been sent to the email address on file for <b>{{usedLogin}}</b>.
         </div>
         <div ng-if="showNotFound" class="alert alert-warning">
             An account with username <b>{{usedLogin}}</b> has not been found.
