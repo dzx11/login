@@ -1,17 +1,19 @@
-<div class="row">
-    <div class="col-sm-1">
+<div class="row form-group" ng-class="{'has-error': showLoginError()}">
+    <div class="col-sm-1 control-label">
         Login:
     </div>
-    <div class="col-sm-11">
-        <input type="text" ng-model="login">
+    <div class="col-sm-4 form-group" ng-class="{'has-error': showError()}">
+        <input type="text" ng-model="login" class="form-control" aria-describedby="helpBlock">
+        <span ng-if="showLoginError()" id="helpBlock" class="help-block" >{{loginError}}</span>
     </div>
 </div>
-<div class="row">
-    <div class="col-sm-1">
+<div class="row form-group" ng-class="{'has-error': showPWError}">
+    <div class="col-sm-1 control-label">
         Password:
     </div>
-    <div class="col-sm-11">
-        <input type="password" ng-model="pw">
+    <div class="col-sm-4 form-group" ng-class="{'has-error': showPWError}">
+        <input type="password" ng-model="pw" class="form-control" aria-describedby="helpBlock2">
+        <span ng-if="showPWError" id="helpBlock2" class="help-block">{{pwError}}</span>
     </div>
 </div>
 <div class="row">

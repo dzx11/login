@@ -1,15 +1,23 @@
-angular.module('myApp').controller('registrationCtrl', ['$location', '$log', '$scope', 'dataServiceMock', 'stateService', function ($location, $log, $scope, dataServiceMock, stateService) {
+angular.module('myApp').controller('registrationCtrl', ['$location', '$log', '$scope', '$timeout', 'dataServiceMock', 'stateService', function ($location, $log, $scope, $timeout, dataServiceMock, stateService) {
     
     //models
     $scope.login = '';
+    $scope.loginError = 'Login needs to be at least 1 character.';
     $scope.pw = '';
+    $scope.pwError = 'Password is incorrect';
     //functions
     $scope.clickLogin = clickLogin;
     $scope.clickReset = clickReset;
+    $scope.showLoginError = showLoginError;
+    $scope.showPWError = false;
+    
+    var hasAttemptedLogin = false;
     
     function clickLogin () {
-        if (!$scope.login.length) {
+        hasAttemptedLogin = true;
+        if ($scope.login.length < 1) {
             //display error message
+            return;
         } else {
             dataServiceMock.checkPW($scope.login, $scope.pw).then(function(isCorrect) {
                 if (isCorrect) {
@@ -23,7 +31,11 @@ angular.module('myApp').controller('registrationCtrl', ['$location', '$log', '$s
                         $location.path('login_success');
                     });
                 } else {
-                    //display error message
+                    //display error message for x seconds
+                    $scope.showPWError = true;
+                    $timeout(function () {
+                        $scope.showPWError = false;
+                    }, 4000);
                 }
             }).catch(function(error) {
                 $log.error(error);//log the server error
@@ -33,5 +45,13 @@ angular.module('myApp').controller('registrationCtrl', ['$location', '$log', '$s
     
     function clickReset () {
         $location.path('pw_reset');//redirect to reset
+    }
+    
+    function showLoginError () {
+        if ($scope.login.length <= 0 && hasAttemptedLogin) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }]);
